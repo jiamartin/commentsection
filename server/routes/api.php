@@ -14,5 +14,7 @@ use Illuminate\Http\Request;
 */
 
 Route::get('get_comments', 'CommentsController@index');
+Route::get('get_posts', 'PostsController@index');
 Route::post('add_comments', 'CommentsController@store');
+Route::post('add_post', 'PostsController@store');
 

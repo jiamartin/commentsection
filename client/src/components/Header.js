@@ -1,5 +1,7 @@
 
+import React from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom';
 
 
 const Header = ({ title }) => {
@@ -10,12 +12,13 @@ const Header = ({ title }) => {
     return (
         <header className='header'>
             <h1>{title}</h1>
+            <Link to="/blogs" > Blogs </Link>
         </header>
     )
 }
 
 Header.defaultProps = {
-    title: 'Post Comment',
+    title: 'Blog',
 }
 
 Header.propTypes = {

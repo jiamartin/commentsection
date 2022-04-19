@@ -1,18 +1,25 @@
 
+import React from 'react';
 import Header from './components/Header'
 import Comments from './components/Comments'
 import AddComment from './components/AddComment'
+import Blog from './components/Blogs'
 import { Provider } from 'react-redux';
 import store from './store';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 function App() {
   return (
     <Provider store={store}>
-        <div className="container">
+        <BrowserRouter>
+        <div className='container'>
         <Header />
-        <Comments />
-        <AddComment />
+        <Routes>
+            <Route path="/" element={<><Comments/><AddComment/></>}></Route>
+            <Route path="/blogs" element={<Blog/>}></Route>
+        </Routes>
         </div>
+        </BrowserRouter>
     </Provider>
   );
 }

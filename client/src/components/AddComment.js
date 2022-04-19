@@ -26,6 +26,7 @@ const AddComment = ({ addComments }) => {
         }
         addComments(formData);
         onAdd({ comment_by: "", comment_desc: "" });
+
     }
     
     
@@ -33,8 +34,11 @@ const AddComment = ({ addComments }) => {
     <form className="add-form" onSubmit={onSubmit}>
         <div className="form-control">
            <label htmlFor="">Commentor's Name</label>
-            <input name="comment_by" type="text" placeholder="Type your Name" 
-             value={comment_by} onChange={e => onChange(e)}/>
+            <input name="comment_by" 
+            type="text" 
+            placeholder="Type your Name" 
+            value={comment_by}
+            onChange={e => onChange(e)}/>
        </div>
        <div className="form-control">
            <label htmlFor="">Add Comment</label>

@@ -3,25 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Comment;
+use App\Post;
 use App\Http\CommentRepository\CommentInterface;
-use App\Http\CommentsRequests\CommentsRequest;
 
-use App\Http\CommentsResources\CommentsSqlResource;
-use App\Http\CommentsResources\NewCommentResource;
-
-
-class CommentsController extends Controller
+class PostsController extends Controller
 {
 
-    private $commentRepository;
+    private $postRepository;
 
-    public function __construct(CommentInterface $commentRepository)
+    public function __construct(CommentInterface $postRepository)
     {
-        $this->commentRepository = $commentRepository;
+        $this->postRepository = $postRepository;
     }
-
     /**
      * Display a listing of the resource.
      *
@@ -29,19 +22,12 @@ class CommentsController extends Controller
      */
     public function index()
     {
-        try {
-            $comments = $this->commentRepository->get_comments();
-            return (new CommentsSqlResource( $comments ));
-            
-        } catch (Throwable $e) {
-            return $e;
-        }
-        // $comments = Comment::orderBy('id', 'DESC')->get();
-        // $comments = $this->commentRepository->get_comments();
-        // return response()->json([
-        //     'status'=> 200,
-        //     'comments'=> $comments,
-        // ]);
+        // $posts = Post::orderBy('id', 'DESC')->get();
+        $posts = $this->postRepository->get_posts();
+        return response()->json([
+            'status'=> 200,
+            'posts'=> $posts,
+        ]);
     }
 
     /**
@@ -60,16 +46,16 @@ class CommentsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CommentsRequest $request)
+    public function store(Request $request)
     {
         // $comment = new Comment;
         // $comment->comment_by = $request->input('comment_by');
         // $comment->comment_desc = $request->input('comment_desc');
         // $comment->save();
-        $comment = $this->commentRepository->add_comments( $request );
+        $post = $this->postRepository->add_post( $request );
         return response()->json([
             'status'=> 200,
-            'message'=> 'Comment Posted',
+            'message'=> 'Posted',
         ]);
     }
 
